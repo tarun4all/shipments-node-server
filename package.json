@@ -1,0 +1,26 @@
+{
+  "name": "shipments-node-server",
+  "version": "1.0.0",
+  "description": "shipments app with qr code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarun4all/shipments-node-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tarun4all/shipments-node-server/issues"
+  },
+  "homepage": "https://github.com/tarun4all/shipments-node-server#readme",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "mongoose": "^5.9.9"
+  }
+}
