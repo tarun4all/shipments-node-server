@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 
 
-//schema
+//NOT NEEDED
 let stepSchema = Schema({
     _id:            { type: mongoose.Schema.Types.ObjectId, index: true, required: true },
     Step_Number:    { type: Number, required: true},

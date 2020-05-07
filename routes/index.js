@@ -8,6 +8,7 @@ router.group('/api', (app) => {
   });
 });
 
+
 // router.get('*.*', express.static(path.join(__dirname, 'public/view/build')));
 
 // router.get('/*', (req, res) => {

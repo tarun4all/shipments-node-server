@@ -1,18 +1,21 @@
 import { Schema } from 'mongoose';
 
 
-//schema
-let materialSchema = Schema({
-    _id:          { type: mongoose.Schema.Types.ObjectId, index: true },
-    Steps:        [
-                    {type: mongoose.Schema.Types.ObjectId, index: true, ref:Step },
-                    {type: mongoose.Schema.Types.ObjectId, index: true, ref:User },
-                    {type: String, required: false } //remarks
-                  ],
+//for each semiFinishedProduct
+let semiFinishedProduct = Schema({
+    _id:          { type: mongoose.Schema.Types.ObjectId, index: true }, //SN
+    FinalProduct: { type: mongoose.Schema.Types.ObjectId, ref: Product, index: true},
     Name:         { type: String, required: true  },
-    PN:           { type: String, required: true, index: true}, //we can either use _id i.e., auto generated or we can create our own part number
-    Timestamp:    { type: Date,   required: true  },
+    PN:           { type: String, required: true, index: true},
+    Steps:        [
+                    {type: mongoose.Schema.Types.ObjectId, index: true, ref:User },
+                    {type: Number, required: true }, //step number
+                    {type: Date,   required: true }, //timestamp
+                    {type: String, required: false} //remarks
+                  ],  
     Description:  { type: String, required: false }
+    
+    //when all the steps are done, value added to Product Model. 
 });
 
 let Material = module.exports = mongoose.model('Material', materialSchema);
