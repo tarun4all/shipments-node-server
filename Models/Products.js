@@ -11,7 +11,6 @@ let productSchema = Schema({
                 {type: mongoose.Schema.Types.ObjectId, ref:Product, required: false}, //material id
                 {type: Number, required: false } // how much of the item
               ],
-    PN:       { type: mongoose.Schema.Types.ObjectId, index: true, ref:Material, required: true},
     //can also add image
 });
 

@@ -2,7 +2,7 @@ import { Schema } from 'mongoose';
 
 
 //for each semiFinishedProduct
-let semiFinishedProduct = Schema({
+let semiFinishedProductSchema = Schema({
     _id:          { type: mongoose.Schema.Types.ObjectId, index: true }, //SN
     FinalProduct: { type: mongoose.Schema.Types.ObjectId, ref: Product, index: true},
     Name:         { type: String, required: true  },
@@ -18,4 +18,4 @@ let semiFinishedProduct = Schema({
     //when all the steps are done, value added to Product Model. 
 });
 
-let Material = module.exports = mongoose.model('Material', materialSchema);
+let SemiFinishedProduct = module.exports = mongoose.model('SemiFinishedProduct', semiFinishedProductSchema);
