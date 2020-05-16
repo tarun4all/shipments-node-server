@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
+//controllers
+const clientController = require("../controller/clientController");
+
 router.group('/api', (app) => {
-  app.get('/login', (req, res) => {
-    res.send('oh');
-  });
+  app.post('/signup', clientController.signup);
 });
 
 // router.get('*.*', express.static(path.join(__dirname, 'public/view/build')));
