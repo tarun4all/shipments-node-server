@@ -1,0 +1,7 @@
+{
+    "group" : {"name": "codalien", "id": "fuydcjcdjc12121jhvjh", "email": "CEO@codalien.com", "category": ["wood leg", "screw"]},
+    "employees" : [{"name": "Tarun", "email": "", "designation": "TL", "doj": ""}, {"name": "Ujjwal", "email": "", "designation": "CTO", "doj": ""}],
+    "warehouse" : [{"name": "Screw", "qty": 5, "unit": "dozen", "log": []}],
+    "order" : [{"com": "Tec shek", "targetDate": "", "assign": {"tl": "emp id", "worker": "", "qa": "", "products": ["123d", "123dfd"]} }],
+    "products" : [{"_id": "123d", "order_id": "", "production": [{"remark": "", "stock": "", "done_by": "", "approveby": "", "status": "pending"}]}]
+}

@@ -1,27 +1,12 @@
 const express = require("express");
-const path = require('path');
-const mongoose = require('mongoose');
-
-require('dotenv').config();
-
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
-let db = mongoose.connection;
-
-//check for connection
-db.once('open', ()=>console.log('Connected to MongoDb'))
-
-//check for db errors
-db.on('error', (err)=>console.log(err));
-
-
-//Init App
 const app = express();
+const path = require('path');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public/')));
 
-
+require('dotenv').config();
 require('./bootloader/index')();
 
 //router.group enable
