@@ -26,6 +26,11 @@ const signup = async (req, res, next) => {
     }
 }
 
+const login = async (req, res, next) => {
+    res.send("done");
+}
+
 module.exports = {
     signup,
+    login,
 }

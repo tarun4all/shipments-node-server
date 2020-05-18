@@ -5,8 +5,12 @@ const path = require('path');
 //controllers
 const clientController = require("../controller/clientController");
 
+//middlewares
+const {validateUser} = require("../middleware/auth");
+
 router.group('/api', (app) => {
   app.post('/signup', clientController.signup);
+  app.post('/login', validateUser, clientController.login);
 });
 
 // router.get('*.*', express.static(path.join(__dirname, 'public/view/build')));
