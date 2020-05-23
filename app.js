@@ -8,6 +8,7 @@ app.use(express.static(path.join(__dirname, 'public/')));
 
 require('dotenv').config();
 require('./bootloader/index')();
+require('./bootloader/passportAuth');
 
 //router.group enable
 require('./utils/expressGroup');
@@ -25,7 +26,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
     console.log(err)
     res.status(err.status || 500)
-    res.send({error: err.message || 'Something bad happens.'});
+    res.send({error: err.message || err});
 });
 
 const port = process.env.PORT || '3000';

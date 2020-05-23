@@ -2,7 +2,7 @@ const crypto = require('crypto');
 
 //TODO to change before production
 const algorithm = process.env.encryptSecret || 'aes192';
-const password = 'abcdefghijklmnopqrstuvwxyz';
+const password = 'abcd12345';
 
 module.exports = {
     name: 'encrypt',
@@ -20,7 +20,7 @@ module.exports = {
                 const decipher = crypto.createDecipher(algorithm, password);
                 let decrypted = decipher.update(payload, 'hex', 'utf8');
                 decrypted += decipher.final('utf8');
-                return JSON.parse(decrypted);
+                return decrypted;
             } catch(err) {
                 return {};
             }

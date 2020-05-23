@@ -6,11 +6,14 @@ const path = require('path');
 const clientController = require("../controller/clientController");
 
 //middlewares
-const {validateUser} = require("../middleware/auth");
+const {validateUser, loginValidate} = require("../middleware/auth");
 
 router.group('/api', (app) => {
   app.post('/signup', clientController.signup);
-  app.post('/login', validateUser, clientController.login);
+  app.post('/login', [loginValidate]);
+  app.post('/forgetPassword', clientController.forgetPassword);
+  app.post('/emp/create', [validateUser], clientController.createEmployee);
+  app.get('/emp/show', [validateUser], clientController.showEmployee);
 });
 
 // router.get('*.*', express.static(path.join(__dirname, 'public/view/build')));

@@ -1,16 +1,22 @@
-const validateUser = (req, res, next) => {
-    const detokenize = services.encrypt.decode(req.headers.authorization);
-
-    if( Object.keys(detokenize).length > 0  &&  detokenize._id ) {
-        //checks id from mongo and update to request payload
-            //object will contains user id , email, and rights
-        req.loggedUser = {name: "test user"};
-        next();
-    } else {
-        next({message: "invalid token", status: 400});
-    }
-}
+const passport = require('passport');
 
 module.exports = {
-    validateUser
-}
+    loginValidate: function(req, res, next) {
+        passport.authenticate('local', function(err, user, info) {
+          if(err) next("Invalid credentials");
+          else res.send(user);
+        })(req, res, next);
+    },
+    validateUser:  function(req, res, next) {
+        passport.authenticate('bearer', { session: false }, function(err, user, info) {
+          if(err) next("Invalid Token");
+          else {
+              req.user = user;
+              next();
+          }
+        })(req, res, next);
+    },
+    resetPassword : function(req, res, next) {
+        next();
+    }
+};
