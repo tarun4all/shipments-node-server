@@ -9,7 +9,8 @@ const userSchema = new Schema({
     age: { type: Number},
     gender: { type: String},
     password: { type: String, required: true},
-    company_id : { type: Schema.Types.ObjectId, required: true, ref: 'company' }
+    company_id : { type: Schema.Types.ObjectId, required: true, ref: 'company' },
+    roles: {},
 });
 
 let User = mongoose.model("User", userSchema);

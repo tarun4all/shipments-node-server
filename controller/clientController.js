@@ -35,6 +35,10 @@ const signup = async (req, res, next) => {
         if(data) {
             //TODO to make salt with config file
             value.password = await bcrypt.hash(value.password, 10).catch(err => {next(err)});
+            value.roles={};
+            value.roles.stock=['create', 'read', 'update', 'delete'];
+            value.roles['user']=['create', 'read', 'update', 'delete'];
+            console.log('user', value);
             services.user.create(data['_id'], value);
             res.send("done");
         }
@@ -57,6 +61,10 @@ const createEmployee = async (req, res, next) => {
     } else {
         //TODO to make salt with config file
         value.password = await bcrypt.hash(value.password, 10).catch(err => {next(err)});
+        value.company_id = req.user.company_id;
+        value.role['stock']=['create', 'read', 'update', 'delete'];
+        value.role['user'] = ['read'];
+        console.log('user', value);
         services.user.create(req.user['_id'], value);
         res.send("done");
     }

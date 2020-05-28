@@ -13,7 +13,7 @@ router.group('/api', (app) => {
   app.post('/login', [loginValidate]);
   app.post('/forgetPassword', clientController.forgetPassword);
   app.post('/emp/create', [validateUser], clientController.createEmployee);
-  app.get('/emp/show', [validateUser], clientController.showEmployee);
+  app.get('/user/read', [validateUser], clientController.showEmployee);
 });
 
 // router.get('*.*', express.static(path.join(__dirname, 'public/view/build')));
