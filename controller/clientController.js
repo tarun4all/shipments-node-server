@@ -62,6 +62,22 @@ const createEmployee = async (req, res, next) => {
     }
 }
 
+const updateUser = async (req, res, next) => {
+    console.log('inside func',req.body);
+    const schema = Joi.object().keys({
+        name: Joi.string().trim(),
+        email: Joi.string().trim().email(),
+        phone: Joi.string().trim(),
+        age: Joi.number(),
+        gender: Joi.string().trim().valid('m', 'f', 'other'),
+        password: Joi.string().trim().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    })
+    const { error, value } = schema.validate(req.body);
+    console.log('value', value);
+    services.user.update(req.params.id,value);
+
+}
+
 const showEmployee = async (req, res, next) => {
     if(req.user && req.user.company_id) {
         UserModel.find({company_id: req.user.company_id}, 'name gender email phone').then((data) => {
@@ -122,4 +138,5 @@ module.exports = {
     createEmployee,
     showEmployee,
     forgetPassword,
+    updateUser
 }
