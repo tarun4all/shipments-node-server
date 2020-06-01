@@ -8,6 +8,8 @@ const UserModel = require("../db/model/user");
 const bcrypt = require('bcrypt');
 const convertObjectID = require('mongoose').Types.ObjectId;
 
+const userPermission = require("../config/userPermissions") //getting user permission from config
+
 const generateAuthToken = (user) => {
     let { _id, company_id } = user, token = { _id, company_id, expire: (new Date((new Date).getTime() + 24*60*60*1000)) };
     console.log(token);
@@ -35,9 +37,7 @@ const signup = async (req, res, next) => {
         if(data) {
             //TODO to make salt with config file
             value.password = await bcrypt.hash(value.password, 10).catch(err => {next(err)});
-            value.roles={};
-            value.roles.stock=['create', 'read', 'update', 'delete'];
-            value.roles['user']=['create', 'read', 'update', 'delete'];
+            value.roles=userPermission.val.owner; 
             console.log('user', value);
             services.user.create(data['_id'], value);
             res.send("done");
@@ -62,9 +62,7 @@ const createEmployee = async (req, res, next) => {
         //TODO to make salt with config file
         value.password = await bcrypt.hash(value.password, 10).catch(err => {next(err)});
         value.company_id = req.user.company_id;
-        value.roles={};
-        value.roles.stock=['create', 'read', 'update', 'delete'];
-        value.roles['user']=['read',];
+        value.roles=userPermission.val.employee;
         console.log('user', value);
         services.user.create(req.user['_id'], value);
         res.send("done");

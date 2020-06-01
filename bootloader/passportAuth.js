@@ -36,7 +36,7 @@ passport.use(new BearerStrategy((token, done) => {
             UserModel.findOne({_id: convertObjectID(_id), company_id: company_id}).then((data) => {
                 console.log(data);
                 if(data) {
-                    done(null, {_id: data._id, company_id: data.company_id, email: data.email});
+                    done(null, {_id: data._id, company_id: data.company_id, email: data.email, roles: data.roles});
                 } else done(true);
             }).catch((err) => {
                 done(true);

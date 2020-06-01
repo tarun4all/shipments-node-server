@@ -14,6 +14,7 @@ router.group('/api', (app) => {
   app.post('/forgetPassword', clientController.forgetPassword);
   app.post('/user/create', [validateUser], clientController.createEmployee);
   app.get('/user/read', [validateUser], clientController.showEmployee);
+  app.get('/stock/read', [validateUser])
 });
 
 // router.get('*.*', express.static(path.join(__dirname, 'public/view/build')));
