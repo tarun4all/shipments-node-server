@@ -9,7 +9,7 @@ module.exports = {
                 company_id: convertObjectID(company_id),
                 ...userData
             });
-
+            console.log('user before save', user);
             user.save(function (err, result) {
                 console.log(err, result);
             });

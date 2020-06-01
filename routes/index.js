@@ -12,7 +12,7 @@ router.group('/api', (app) => {
   app.post('/signup', clientController.signup);
   app.post('/login', [loginValidate]);
   app.post('/forgetPassword', clientController.forgetPassword);
-  app.post('/emp/create', [validateUser], clientController.createEmployee);
+  app.post('/user/create', [validateUser], clientController.createEmployee);
   app.get('/user/read', [validateUser], clientController.showEmployee);
 });
 

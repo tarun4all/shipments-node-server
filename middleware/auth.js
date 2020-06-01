@@ -11,17 +11,13 @@ module.exports = {
     validateUser: function(req, res, next) {
         passport.authenticate('bearer', { session: false }, function(err, user, info) {
           if(user){
-            req.user = user;
-            
-            console.log('user',user);
-            console.log('url', req.url);
             let url=req.url.split('/');
-
-            console.log('auth user',user);
-            // console.log('does user have permission',user.roles[url[1]].includes(url[2]));
-
-            
-            next();
+            UserModel.findOne({_id:user._id}).then((user)=>{
+                req.user=user;
+                if(user.roles[url[1]] && user.roles[url[1]].includes(url[2])) 
+                    next();
+                else next('Not enough permission');
+            })
         }
         else{next("some error occured");} 
         })(req, res, next);
