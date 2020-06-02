@@ -3,6 +3,7 @@ const Joi = require('@hapi/joi');
 //db models
 const CompanyModel = require("../db/model/company");
 const UserModel = require("../db/model/user");
+const StockModel = require("../db/model/stock")
 
 //utilities
 const bcrypt = require('bcrypt');
@@ -60,6 +61,25 @@ const createEmployee = async (req, res, next) => {
         services.user.create(req.user['_id'], value);
         res.send("done");
     }
+}
+
+const createStock = async (req, res, next) =>{
+    // console.log('req body', req.body);
+    req.body.forEach(el=>{
+        const schema = Joi.object().keys({
+           name: Joi.string().trim().required(),
+           quantity: Joi.number().required(),
+           description: Joi.string().trim().required(),
+        })
+        const { error, value } = schema.validate(el);
+        
+        if (error) next({'error': error});
+        else el.company_id = convertObjectID(req.user.company_id);
+
+    })
+    // console.log('req',req.body);
+    services.stock.createMany(req.body);
+    res.send("done")
 }
 
 const showEmployee = async (req, res, next) => {
@@ -122,4 +142,5 @@ module.exports = {
     createEmployee,
     showEmployee,
     forgetPassword,
+    createStock,
 }

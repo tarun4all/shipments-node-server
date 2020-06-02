@@ -9,11 +9,13 @@ const clientController = require("../controller/clientController");
 const {validateUser, loginValidate} = require("../middleware/auth");
 
 router.group('/api', (app) => {
+
   app.post('/signup', clientController.signup);
   app.post('/login', [loginValidate]);
   app.post('/forgetPassword', clientController.forgetPassword);
   app.post('/emp/create', [validateUser], clientController.createEmployee);
   app.get('/emp/show', [validateUser], clientController.showEmployee);
+  app.post('/stock/create', [validateUser], clientController.createStock)
 });
 
 // router.get('*.*', express.static(path.join(__dirname, 'public/view/build')));
