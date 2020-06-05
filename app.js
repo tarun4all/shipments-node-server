@@ -6,6 +6,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public/')));
 
+//setting template system
+//Loads the handlebars module
+const handlebars = require('express-handlebars');
+
+//Sets handlebars configurations (we will go through them later on)
+app.engine('handlebars', handlebars({defaultLayout: 'main', extname: '.hbs'}));
+
+//Sets our app to use the handlebars engine
+app.set('view engine', '.hbs');
+
 require('dotenv').config();
 require('./bootloader/index')();
 require('./bootloader/passportAuth');
